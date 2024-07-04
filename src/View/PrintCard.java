@@ -79,14 +79,6 @@ public class PrintCard {
 
     }
 
-    private static JTextField createTextField(int x, int y, int width, int height) {
-
-        JTextField textField = new JTextField();
-        textField.setBounds(x, y, width, height);
-        return textField;
-
-    }
-
     private static JButton createButton(String text, int x, int y, int width, int height) {
 
         JButton button = new JButton(text);
