@@ -16,6 +16,10 @@ public class Card {
 
     }
 
+    public Card(String nomorMember) {
+        this.nomorMember = nomorMember;
+    }
+
     public Card(String nama, String tanggalLahir, String tanggalPembuatan, File fotoMember, String jenisKelamin, String masaBerlaku) {
         this.nama = nama;
         this.tanggalLahir = tanggalLahir;
