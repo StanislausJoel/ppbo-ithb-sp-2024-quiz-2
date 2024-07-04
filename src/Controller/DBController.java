@@ -1,5 +1,6 @@
 package Controller;
 
+import java.io.File;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,7 @@ public class DBController {
         try {
 
             conn.connect();
-            String query = "SELECT * FROM users WHERE id='" + id + "'";
+            String query = "SELECT * FROM users WHERE nomor_member='" + id + "'";
             Statement stmt = conn.con.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             
@@ -33,6 +34,7 @@ public class DBController {
                     card.setTanggalPembuatan(rs.getString("tanggal_pembuatan"));
                     card.setMasaBerlaku(rs.getString("masa_berlaku"));
                     card.setNomorMember(rs.getString("nomor_member"));
+                    card.setFotoMember(new File(rs.getString("foto")));
 
                 } while (rs.next());
 
@@ -58,7 +60,7 @@ public class DBController {
     // INSERT
     public static boolean insertNewUser(Card card) {
 
-        String query = "INSERT INTO users (nama, jenis_kelamin, tanggal_lahir, tanggal_pembuatan, masa_berlaku) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (nama, jenis_kelamin, tanggal_lahir, tanggal_pembuatan, masa_berlaku, foto) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
 
@@ -70,8 +72,20 @@ public class DBController {
             stmt.setString(3, card.getTanggalLahir());
             stmt.setString(4, card.getTanggalPembuatan());
             stmt.setString(5, card.getMasaBerlaku());
+            stmt.setString(6, card.getFotoMember().getAbsolutePath());
 
             stmt.executeUpdate();
+
+            String query2 = "SELECT * FROM users WHERE nama='" + card.getNama() + "' AND tanggal_lahir='" + card.getTanggalLahir() + "'";
+            Statement stmt2 = conn.con.createStatement();
+            ResultSet rs = stmt2.executeQuery(query2);
+
+            if (rs.next()) {
+
+                card.setNomorMember(rs.getString("nomor_member"));
+
+            }
+
             return true;
 
         } 
@@ -86,6 +100,8 @@ public class DBController {
             conn.disconnect();
 
         }
+
+        
 
     }
 

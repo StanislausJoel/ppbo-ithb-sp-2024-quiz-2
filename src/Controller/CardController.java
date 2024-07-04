@@ -6,18 +6,15 @@ public class CardController {
 
         String newTanggal = "";
 
-        String[] arrTanggal = tanggal.split("-");
-
-        System.out.println(tanggal);
-        System.out.println(arrTanggal);
+        String[] arrTanggal = tanggal.split(" ");
 
         arrTanggal[2] = String.valueOf(Integer.parseInt(arrTanggal[2]) + 2);
 
         for (int i = 0; i < arrTanggal.length - 1; i++) {
-            newTanggal += arrTanggal[i] + "-";
+            newTanggal += arrTanggal[i] + " ";
         }
         newTanggal += arrTanggal[2];
-
+        
         return newTanggal;
 
     }
