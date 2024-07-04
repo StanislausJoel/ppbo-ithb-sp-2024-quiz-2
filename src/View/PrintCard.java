@@ -21,7 +21,35 @@ public class PrintCard {
         JFrame frame = createFrame();
         frame.setLayout(null);
 
+        ImageIcon photoIcon = new ImageIcon(card.getFotoMember().getAbsolutePath());
+        JLabel photoLabel = new JLabel(photoIcon);
+        photoLabel.setBounds(10, 10, 300, 400);
+        frame.add(photoLabel);
+
+        JLabel nameLabel = createLabel("NAME", 350, 10, 100, 20);
+        frame.add(nameLabel);
+
+        JLabel birthDateLabel = createLabel("BIRTHDATE", 350, 60, 100, 20);
+        frame.add(birthDateLabel);
+
+        JLabel validLabel = createLabel("VALID UNTIL", 350, 110, 100, 20);
+        frame.add(validLabel);
+
+        JLabel nomorMemberLabel = createLabel("NO", 350, 160, 100, 20);
+        frame.add(nomorMemberLabel);
+
+        JLabel noteTextLabel = createLabel("If you happen to find this card, please return it to this address:", 20, 200, 500, 20);
+        frame.add(noteTextLabel);
+
+        ImageIcon addressIcon = new ImageIcon("..\\asset\\Picture6\\Picture6-0000.jpg");
+        JLabel addressLabel = new JLabel(addressIcon);
+        addressLabel.setBounds(20, 240, 315, 175);
+        frame.add(addressLabel);   
         
+        ImageIcon barcodeIcon = new ImageIcon("..\\asset\\Picture1\\Picture1-0000.jpg");
+        JLabel barcodeLabel = new JLabel(barcodeIcon);
+        barcodeLabel.setBounds(20, 240, 300, 400);
+        frame.add(barcodeLabel);  
 
     }
 
@@ -43,7 +71,7 @@ public class PrintCard {
 
     }
 
-    private JLabel createLabel(String text, int x, int y, int width, int height) {
+    private static JLabel createLabel(String text, int x, int y, int width, int height) {
 
         JLabel label = new JLabel(text);
         label.setBounds(x, y, width, height);
@@ -51,7 +79,7 @@ public class PrintCard {
 
     }
 
-    private JTextField createTextField(int x, int y, int width, int height) {
+    private static JTextField createTextField(int x, int y, int width, int height) {
 
         JTextField textField = new JTextField();
         textField.setBounds(x, y, width, height);
@@ -59,7 +87,7 @@ public class PrintCard {
 
     }
 
-    private JButton createButton(String text, int x, int y, int width, int height) {
+    private static JButton createButton(String text, int x, int y, int width, int height) {
 
         JButton button = new JButton(text);
         button.setBounds(x, y, width, height);
