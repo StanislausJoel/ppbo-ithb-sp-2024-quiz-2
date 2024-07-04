@@ -58,7 +58,7 @@ public class DBController {
     // INSERT
     public static boolean insertNewUser(Card card) {
 
-        String query = "INSERT INTO users (nama, jenis_kelamin, tanggal_lahir, tanggal_pembuatan, masa_berlaku, nomor_member) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO users (nama, jenis_kelamin, tanggal_lahir, tanggal_pembuatan, masa_berlaku) VALUES (?, ?, ?, ?, ?)";
 
         try {
 
@@ -70,7 +70,6 @@ public class DBController {
             stmt.setString(3, card.getTanggalLahir());
             stmt.setString(4, card.getTanggalPembuatan());
             stmt.setString(5, card.getMasaBerlaku());
-            stmt.setString(6, card.getNomorMember());
 
             stmt.executeUpdate();
             return true;
