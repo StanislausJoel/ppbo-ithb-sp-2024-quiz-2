@@ -30,6 +30,10 @@ public class Homepage {
         frame.add(registerButton);
 
         JButton viewMemberButton = createButton("View Member List", 180, FRAME_HEIGHT - 80, 150, 30);
+        viewMemberButton.addActionListener(e -> {
+            frame.dispose();
+            new SearchPage();
+        });
         frame.add(viewMemberButton);
 
         frame.setVisible(true);

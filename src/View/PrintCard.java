@@ -1,13 +1,15 @@
 package View;
 
 import java.awt.*;
+import java.io.File;
+
 import javax.swing.*;
 
 import Model.Card;
 
 public class PrintCard {
 
-    private static final int FRAME_WIDTH = 1000;
+    private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 600;
     
     public PrintCard(Card card) {
@@ -23,33 +25,62 @@ public class PrintCard {
 
         ImageIcon photoIcon = new ImageIcon(card.getFotoMember().getAbsolutePath());
         JLabel photoLabel = new JLabel(photoIcon);
-        photoLabel.setBounds(10, 10, 300, 400);
+        photoLabel.setBounds(50, 10, 150, 250);
         frame.add(photoLabel);
 
-        JLabel nameLabel = createLabel("NAME", 350, 10, 100, 20);
+        JLabel nameLabel = createLabel("NAME", 250, 10, 100, 20);
         frame.add(nameLabel);
 
-        JLabel birthDateLabel = createLabel("BIRTHDATE", 350, 60, 100, 20);
+        JLabel nameData = createLabel(" : " + card.getNama(), 380, 10, 100, 20);
+        frame.add(nameData);
+
+        JLabel birthDateLabel = createLabel("BIRTHDATE", 250, 60, 100, 20);
         frame.add(birthDateLabel);
 
-        JLabel validLabel = createLabel("VALID UNTIL", 350, 110, 100, 20);
+        JLabel birthDateData = createLabel(" : " + card.getTanggalLahir(), 380, 60, 100, 20);
+        frame.add(birthDateData);
+
+        JLabel validLabel = createLabel("VALID UNTIL", 250, 110, 100, 20);
         frame.add(validLabel);
 
-        JLabel nomorMemberLabel = createLabel("NO", 350, 160, 100, 20);
+        JLabel validData = createLabel(" : " + card.getMasaBerlaku(), 380, 110, 100, 20);
+        frame.add(validData);
+
+        JLabel nomorMemberLabel = createLabel("NO", 250, 160, 100, 20);
         frame.add(nomorMemberLabel);
 
-        JLabel noteTextLabel = createLabel("If you happen to find this card, please return it to this address:", 20, 200, 500, 20);
+        int memberNumber = Integer.parseInt(card.getNomorMember());
+        String nomorMemberFormatter = String.format("G%09d", memberNumber);
+
+        JLabel nomorMemberData = createLabel(" : " + nomorMemberFormatter, 380, 160, 100, 20);
+        frame.add(nomorMemberData);
+
+        JLabel noteTextLabel = createLabel("If you happen to find this card, please return it to this address:", 50, 280, 500, 20);
         frame.add(noteTextLabel);
 
-        ImageIcon addressIcon = new ImageIcon("..\\asset\\Picture6\\Picture6-0000.jpg");
+        String currentWorkingDir = System.getProperty("user.dir");
+
+        String addressPath = currentWorkingDir + File.separator + "asset" + File.separator + "Picture6" + File.separator + "Picture6-0000.jpg";
+        ImageIcon addressIcon = new ImageIcon(addressPath);
         JLabel addressLabel = new JLabel(addressIcon);
-        addressLabel.setBounds(20, 240, 315, 175);
-        frame.add(addressLabel);   
-        
-        ImageIcon barcodeIcon = new ImageIcon("..\\asset\\Picture1\\Picture1-0000.jpg");
+        addressLabel.setBounds(50, 320, 315, 175);
+        frame.add(addressLabel);
+
+        String barcodePath = currentWorkingDir + File.separator + "asset" + File.separator + "Picture1" + File.separator + "Picture1-0000.jpg";
+        ImageIcon barcodeIcon = new ImageIcon(barcodePath);
         JLabel barcodeLabel = new JLabel(barcodeIcon);
-        barcodeLabel.setBounds(20, 240, 300, 400);
-        frame.add(barcodeLabel);  
+        barcodeLabel.setBounds(400, 240, 300, 400);
+        frame.add(barcodeLabel);
+
+        JButton backButton = createButton("Back to Homepage", 550, 10, 200, 30);
+        backButton.addActionListener(e -> {
+            frame.dispose();
+            new Homepage();
+        });
+        frame.add(backButton);
+ 
+
+        frame.setVisible(true);
 
     }
 

@@ -11,6 +11,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import Controller.CardController;
+import Controller.DBController;
 import Model.Card;
 
 public class RegisterPage {
@@ -115,9 +116,15 @@ public class RegisterPage {
             }
             else {
 
-                String masaBerlaku = CardController.getMasaBerlaku(tanggalPembuatanPicker.getModel().getValue().toString());
+                String tglLahirFormatted = DateLabelFormatter.formatOriginalDateString(tanggalLahirPicker.getModel().getValue());
+                String tglPembuatanFormatted = DateLabelFormatter.formatOriginalDateString(tanggalPembuatanPicker.getModel().getValue());
 
-                Card myCard = new Card(namaField.getText(), tanggalLahirPicker.getModel().getValue().toString(), tanggalPembuatanPicker.getModel().getValue().toString(), filePhoto, genderGroup.getSelection().toString(), masaBerlaku);
+                String masaBerlaku = CardController.getMasaBerlaku(tglPembuatanFormatted);
+
+                String jenisKelamin = priaRadio.isSelected() ? "PRIA" : "WANITA";
+
+                Card myCard = new Card(namaField.getText(), tglLahirFormatted, tglPembuatanFormatted, filePhoto, jenisKelamin, masaBerlaku);
+                DBController.insertNewUser(myCard);
 
                 frame.dispose();
 
