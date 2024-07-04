@@ -15,20 +15,30 @@ public class SearchPage {
 
     private static void showSearchPage() {
 
-        int inputNomor = Integer.parseInt(JOptionPane.showInputDialog(null, "Masukkan nomor anggota"));
+        String inputNomor = JOptionPane.showInputDialog(null, "Masukkan nomor anggota");
 
-        Card card = DBController.getCard(inputNomor);
-
-        if (card != null) {
+        if (inputNomor != null) {
             
-            new PrintCard(card);
+            Card card = DBController.getCard(Integer.parseInt(inputNomor));
+    
+            if (card != null) {
+                
+                new PrintCard(card);
+    
+            }
+            else {
+    
+                JOptionPane.showMessageDialog(null, "Data tidak ditemukan!", "Error", JOptionPane.ERROR_MESSAGE);
+    
+            }
 
         }
         else {
 
-            JOptionPane.showMessageDialog(null, "Data tidak ditemukan!", "Error", JOptionPane.ERROR_MESSAGE);
+            new Homepage();
 
         }
+
 
     }
 
